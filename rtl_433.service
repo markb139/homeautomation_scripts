@@ -1,0 +1,16 @@
+[Unit]
+Description=RTL433 Service
+Requires=mosquitto.service
+After=multi-user.target mosquitto.service
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=30
+StartLimitInterval=150
+StartLimitBurst=8
+ExecStart=/home/pi/homeautomation_scripts/run_rtl.sh
+
+
+[Install]
+WantedBy=multi-user.target

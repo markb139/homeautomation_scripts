@@ -1,0 +1,18 @@
+[Unit]
+Description=Broadlink BG socket services
+Requires=mosquitto.service
+After=multi-user.target mosquitto.service
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=30
+StartLimitInterval=150
+StartLimitBurst=8
+Environment=BROADLINKMQTTCONFIG=/home/pi/broadlink-mqtt/mqtt.conf
+Environment=BROADLINKMQTTCONFIGCUSTOM=/home/pi/broadlink-mqtt/custom.conf
+ExecStart=/home/pi/broadlink-mqtt/env/bin/python /home/pi/broadlink-mqtt/mqtt.py
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
